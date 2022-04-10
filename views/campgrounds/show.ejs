@@ -1,0 +1,193 @@
+<% layout('layouts/boilerplate') %>
+
+    <script src="/javascript/validateforms.js"></script>
+    <link rel="stylesheet" href="/stylesheet/starRating.css">
+    <div class="row">
+        <div class="col-6 p-3">
+            <div class="card mb-3 col-6 offset-3 " style="width: 36rem;">
+                <div id="campgroundCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <% campground.images.forEach((img,i)=>{ %>
+                            <div class="carousel-item <%= i === 0 ? 'active' : '' %> " data-bs-interval="10000">
+                                <img src="<%=img.url%> " class="d-block w-100" alt="">
+                            </div>
+                            <% })%>
+                    </div>
+                    <% if(campground.images.length> 1) {%>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#campgroundCarousel"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#campgroundCarousel"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        <% } %>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%=campground.title%>
+                    </h5>
+                    <span class="lead">
+                        Owner: <%= campground.author.username%>
+                    </span>
+                    <p class="card-text">
+                        <!-- <img src="<%=campground.image %> " alt="" srcset=""> -->
+                        <%=campground.description%>
+                    </p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text">
+                        <em>
+                            <%= campground.location %>
+                        </em>
+                    </li>
+
+                    <li class="list-group-item">
+                        <span class="input-group-text">
+                            $ <%= campground.price%>
+                        </span>
+                    </li>
+                </ul>
+                <% if( loggedUser && campground.author.equals(loggedUser._id)){ %>
+                    <div class="card-body">
+                        <span class="d-flex justify-content-between">
+                            <a class="card-link btn btn-success d-inline fs-6"
+                                href="/campgrounds/<%=campground._id %>/edit">Edit <i
+                                    class="fa-regular fa-pen-to-square m-1"></i></a>
+                            <form class="card-link " action="/campgrounds/<%=campground._id%>?_method=DELETE"
+                                method="POST">
+                                <button class="card-link btn btn-danger mt-0">DELETE CAMPGROUND <i
+                                        class="fa-regular fa-trash-can m-1"></i></button>
+                            </form>
+                        </span>
+
+                    </div>
+                    <% } %>
+                        <div class="card-footer text-muted">
+                            2 days ago
+                        </div>
+                        <a class="card-link btn btn-secondary d-inline mb-0 mt-1" href="/campgrounds">Back</a>
+            </div>
+        </div>
+        <div class="col-6">
+            <% if(loggedUser){ %>
+                <div id='map' style='width: 610px; height: 300px;' class="m-3">
+                </div>
+                <form action="/campgrounds/<%= campground._id%>/reviews" method="POST" class="mb-1 validated-form"
+                    for="review" novalidate>
+                    <div class=" m-3  col-9">
+                        <div class="card text-center">
+                            <div class="card-header ">
+                                <div class="mb-2 mt-1">
+                                    <h4 class="fs-4  text-secondary">
+                                        <%= loggedUser.username %>, Please rate your experience!
+                                    </h4>
+                                </div>
+                                <div class="d-flex col-6 offset-3 justify-content-center align-items-center mt-2">
+                                    <fieldset class="starability-heartbeat ">
+                                        <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]"
+                                            value="1" checked aria-label="No rating." />
+                                        <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                                        <label for="first-rate1" title="Terrible">1 star</label>
+                                        <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                                        <label for="first-rate2" title="Not good">2 stars</label>
+                                        <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                                        <label for="first-rate3" title="Average">3 stars</label>
+                                        <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                                        <label for="first-rate4" title="Very good">4 stars</label>
+                                        <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                                        <label for="first-rate5" title="Amazing">5 stars</label>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="card-body mt-1">
+                                <h5 class="card-title">Your Feedback helps us improve.</h5>
+                                <textarea class="form-control" placeholder="Write your review here.."
+                                    name="review[body]" id="body" style="width: 67vh" required></textarea>
+                                <div class="valid-feedback">
+                                    <h6>Looks good!</h6>
+                                </div>
+                                <div class="invalid-feedback">
+                                    <h6>Please provide a review!</h6>
+                                </div>
+                                <button class="btn btn-success m-2 btn-block" id="review" type="submit">submit</button>
+                            </div>
+                            <div class="card-footer text-muted fs-6">
+                                Thank you!
+                            </div>
+                        </div>
+                        <!-- <label for="body">
+                            <p class="card-header fw-normal">Write a review</p>
+                        </label>
+                        -->
+                    </div>
+
+                </form>
+                <% } else { %>
+
+                    <div id='map' style='width: 600px; height: 300px;' class="m-3">
+                    </div>
+
+                    <% } %>
+                        <% for (let review of campground.reviews){ %>
+                            <div class="col-9 m-3">
+                                <div class="col-5 card form-control ">
+                                    <h6 class="card-title fs-4 fst-italic">
+                                        <%= review.author.username%>
+                                    </h6>
+                                    <p class="starability-result" data-rating="<%= review.rating %>">
+                                        Rated: <%= review.rating %> stars
+                                    </p>
+                                    <h6 class="card-subtitle mb-2 text-muted"> 2d ago
+                                    </h6>
+                                    <h5 class="card-title fw-bold ">Review: <%= review.body %>
+                                    </h5>
+                                    <% if( loggedUser && review.author.equals(loggedUser._id)){ %>
+                                        <form
+                                            action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                            method="POST" id="review">
+                                            <button type="submit" class="btn btn-sm btn-danger" for="review">DELETE
+                                            </button>
+                                        </form>
+                                        <% } %>
+                                </div>
+                            </div>
+
+                            <% } %>
+
+
+        </div>
+
+    </div>
+
+    <script>
+        const mapToken = '<%-process.env.MAPBOX_TOKEN%>'
+        let campground = '[<%-campground.geometry.coordinates%>]'
+        const camptitle = '<%-campground.title%>'
+        const camploc = '<%-campground.location%>'
+    </script>
+    <script src="/javascript/showpageMap.js"></script>
+
+    <script>
+        {
+            (function () {
+                'use strict'
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.validated-form');
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                    .forEach(function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+            })()
+        }
+    </script>

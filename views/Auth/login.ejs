@@ -1,0 +1,67 @@
+<% layout('layouts/boilerplate') %>
+    <div class="d-flex justify-content-center align-items-center mt-3 vh-100">
+        <div class="col-7">
+            <div class="col-6 offset-3 row-6 offset-3">
+                <div class="card shadow bg-light text-dark">
+                    <h4 class="d-flex justify-content-center card-title mt-1">LOGIN</h4>
+                    <div class="card-body ">
+                        <form action="/login" method="POST" for="login" class="validated-form " novalidate>
+                            <div class="p-1">
+                                <label class="form-lable d-flex justify-content-center fw-bold " for="username">Enter
+                                    Username</label>
+                                <input class="form-control " type="text" name="username" id="username" autofocus
+                                    required>
+                                <div class="valid-feedback fw-bolder">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback fw-bolder">
+                                    Please provide a Valid Username
+                                </div>
+                            </div>
+                            <div class="  p-1">
+                                <label class="form-lable d-flex justify-content-center fw-bold " for="password">Enter
+                                    Password</label>
+                                <input class="form-control " type="password" name="password" id="password" required>
+                                <div class="valid-feedback fw-bolder">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback fw-bolder">
+                                    Please provide a Valid Password
+                                </div>
+                            </div>
+                            <div class="d-grid col-8 mx-auto mt-3">
+                                <button for="login" type="submit" class="btn btn-success btn-block">LOGIN</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <script>
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.validated-form')
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>

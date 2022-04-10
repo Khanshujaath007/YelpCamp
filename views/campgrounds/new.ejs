@@ -1,0 +1,114 @@
+<% layout('layouts/boilerplate') %>
+    <div class=" d-flex justify-content-center align-items-center  vh-100">
+        <div class="col-4 card shadow bg-light text-dark">
+            <h1 class="text-center d-flex justify-content-center card-title mt-1">New Campground</h1>
+            <div class="col-10 offset-1">
+                <form for="form" method="POST" action="/campgrounds" enctype="multipart/form-data"
+                    class="validated-form" novalidate>
+                    <div class="mb-3 mt-1">
+                        <label class="form-lable d-flex justify-content-center fw-bold mb-1" for="title">Campground
+                            Name</label>
+                        <input class="form-control " type="text" name="campground[title]" id="title" autofocus required>
+                        <div class="valid-feedback fw-bolder">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback fw-bolder ">
+                            Please provide a Valid Campground Name
+                        </div>
+                    </div>
+                    <div class="mb-2 mt-1">
+                        <label class="form-lable d-flex justify-content-center fw-bold mb-1"
+                            for="location">Location</label>
+                        <input class="form-control " type="text" name="campground[location]" id="location" required>
+                        <div class="valid-feedback fw-bolder">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback fw-bolder">
+                            Please provide Location of the campground
+                        </div>
+                    </div>
+                    <div class="mb-3 custom-file">
+                        <label for="formFileMultiple" class="form-lable d-flex justify-content-center fw-bold mb-1"
+                            custom-file-label">Add Images</label>
+                        <input class="form-control custom-file-input" name="image" type="file" id="formFileMultiple"
+                            multiple>
+                    </div>
+
+                    <!-- <div class="mb-3 mt-1">
+                        <label class="form-lable " for="image">Image</label>
+                        <input class="form-control" type="text" name="campground[image]" id="image" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide a Valid Image
+                        </div>
+                    </div> -->
+                    <div class="mb-3">
+                        <div>
+                            <label class="form-lable d-flex justify-content-center fw-bold mb-1" for="price">Campground
+                                Price</lable>
+                        </div>
+                        <div class="input-group input-group-sm  d-flex justify-content-center align-items-center">
+                            <span class="input-group-text fw-bold ">$</span>
+                            <input id="price" type="number" class="form-control"
+                                aria-label="Amount (to the nearest dollar)" name="campground[price]" required>
+                            <span class="input-group-text fw-bold ">.00</span>
+                            <span class="invalid-feedback fw-bolder">
+                                Price Cannot be Empty!
+                            </span>
+                        </div>
+                        <div class="valid-feedback fw-bolder">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <div>
+                            <label class="form-lable d-flex justify-content-center fw-bold mb-1 mb-0"
+                                for="description">Description</label>
+                            <textarea class="form-control" placeholder="Describe Your Campground!"
+                                name="campground[description]" id="description" style="height: 40px"
+                                required></textarea>
+
+                            <div class="valid-feedback fw-bolder">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback fw-bolder">
+                                Description Cannot be Blank
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button class="btn btn-dark btn-outline-light m-2 btn-block" type="submit" id="form">Add
+                            Campground</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+    <script>
+        (function () {
+            'use strict'
+            bsCustomFileInput.init()
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.validated-form')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
