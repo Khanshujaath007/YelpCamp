@@ -30,8 +30,14 @@
                     <div class="mb-3 custom-file">
                         <label for="formFileMultiple" class="form-lable d-flex justify-content-center fw-bold mb-1"
                             custom-file-label">Add Images</label>
-                        <input class="form-control custom-file-input" name="image" type="file" id="formFileMultiple"
-                            multiple>
+                        <input class="form-control custom-file-input" name="campground[image]" type="file"
+                            id="formFileMultiple" multiple>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide a Valid Image
+                        </div>
                     </div>
 
                     <!-- <div class="mb-3 mt-1">
