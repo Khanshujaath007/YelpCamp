@@ -7,8 +7,8 @@ const incities = require('./incities');
 const stringcities = JSON.stringify(incities);
 const parsedcities = JSON.parse(stringcities)
 //const parsedcities = eval(stringcities);
-
-mongoose.connect('mongodb://localhost:27017/yelp-camp', {
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp'
+mongoose.connect(dbUrl, {
     // useNewUrlPraser: true,
     // useCreateIndex: true,
     // useUnifiedTopology: true
