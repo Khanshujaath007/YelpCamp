@@ -1,10 +1,18 @@
 html {
-    height: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 body {
-
-    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),
         url("https://images.unsplash.com/photo-1503265192943-9d7eea6fc77a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80");
@@ -33,6 +41,7 @@ footer {
         linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.4));
     position: sticky;
     top: 100%;
+
 }
 
 
@@ -49,17 +58,36 @@ footer {
     }
 
     body {
+        height: 100%;
         background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),
             url("https://images.unsplash.com/photo-1608570004513-472c257f2149?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");
         background-size: cover;
+        text-align: center;
+        margin: auto;
+        display: block;
+        background-position: center;
+        text-shadow: 0 0.3rem 0.1rem rgba(0, 0, 0, 0.4);
+        box-shadow: inset 0 0 3rem rgb(0, 0, 0, 0.3);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        animation-name: example;
+        animation-duration: 4s;
+        animation-iteration-count: 1;
+
     }
 
     footer {
-        display: flex;
-        block-size: 90px;
+        display: none;
     }
 
+    @keyframes example {
+        from {
+            background-size: 180%;
+        }
 
-
-
+        to {
+            background-size: 137.0%;
+        }
+    }
 }

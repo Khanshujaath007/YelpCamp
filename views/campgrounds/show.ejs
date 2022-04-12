@@ -1,11 +1,10 @@
 <% layout('layouts/boilerplate') %>
-
     <script src="/javascript/validateforms.js"></script>
     <link rel="stylesheet" href="/stylesheet/starRating.css">
-    <div class="d-flex align-items-center justify-content-center">
+    <div class="d-flex align-items-center justify-content-center h-100 p-0 ml-3 mr-3">
         <div class="conatiner">
             <div class="row m-2">
-                <div class="card col-md-4 m-3 p-0" style="width: 30rem;">
+                <div class="card col-md-4 m-2 p-1" style="width: 21rem;">
                     <div id="campgroundCarousel" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <% campground.images.forEach((img,i)=>{ %>
@@ -72,21 +71,21 @@
                             </div>
                             <a class="card-link btn btn-secondary d-inline mb-0 mt-1" href="/campgrounds">Back</a>
                 </div>
-                <div class="col-md-4 mt-3 p-0">
+                <div class="col-sm-4 mt-3 p-0 ">
                     <% if(loggedUser){ %>
-                        <div id='map' class="mapbox">
+                        <div id='map' class="mapbox  ">
                         </div>
                         <form action="/campgrounds/<%= campground._id%>/reviews" method="POST"
-                            class="mb-1 validated-form" for="review" novalidate>
-                            <div class="mt-3">
+                            class="mb-1validated-form" for="review" novalidate>
+                            <div class="m-2">
                                 <div class="card text-center">
-                                    <div class="card-header ">
-                                        <div class="mb-2 mt-1">
-                                            <h4 class="fs-4  text-secondary">
+                                    <div class="card-header p-0 m-0 ">
+                                        <div class="m-1">
+                                            <h4 class="fs-4  text-secondary m-0">
                                                 <%= loggedUser.username %>, Please rate your experience!
                                             </h4>
                                         </div>
-                                        <div class="d-flex  justify-content-center align-items-center mt-2">
+                                        <div class="d-flex  justify-content-center align-items-center mt-1">
                                             <fieldset class="starability-heartbeat ">
                                                 <input type="radio" id="no-rate" class="input-no-rate "
                                                     name="review[rating]" value="1" checked aria-label="No rating." />
@@ -128,41 +127,45 @@
                         </form>
                         <% } else { %>
 
-                            <div id='map' style='width: 490px; height: 300px;' class=" mapbox m-3 ">
+                            <div id='map' style='width: 490px; height: 300px;' class=" mapbox ">
                             </div>
 
                             <% } %>
                 </div>
             </div>
-            <div class="d-flex  justify-content-center m-2 p-0 ">
-                <div class="col-sm-12 m-1">
-                    <% for (let review of campground.reviews){ %>
-                        <div class=" card form-control m-2">
-                            <h6 class="card-title fs-4 fst-italic">
-                                <%= review.author.username%>
-                            </h6>
-                            <p class="starability-result" data-rating="<%= review.rating %>">
-                                Rated: <%= review.rating %> stars
-                            </p>
-                            <h6 class="card-subtitle mb-2 text-muted"> 2d ago
-                            </h6>
-                            <h5 class="card-title fw-bold ">Review: <%= review.body %>
-                            </h5>
-                            <% if( loggedUser && review.author.equals(loggedUser._id)){ %>
-                                <form
-                                    action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE"
-                                    method="POST" id="review">
-                                    <button type="submit" class="btn btn-sm btn-danger" for="review">DELETE
-                                    </button>
-                                </form>
+            <div class="d-flex justify-content-center align-items-center m-3 p-0 ">
+                <div class="container">
+                    <div class="row m-1">
+                        <% for (let review of campground.reviews){ %>
+                            <div class="col-sm-12">
+                                <div class=" card form-control m-1 p-2 ">
+                                    <h6 class="card-title fs-4 fst-italic">
+                                        <%= review.author.username%>
+                                    </h6>
+                                    <p class="starability-result" data-rating="<%= review.rating %>">
+                                        Rated: <%= review.rating %> stars
+                                    </p>
+                                    <h6 class="card-subtitle mb-2 text-muted"> 2d ago
+                                    </h6>
+                                    <h5 class="card-title fw-bold ">Review: <%= review.body %>
+                                    </h5>
+                                    <% if( loggedUser && review.author.equals(loggedUser._id)){ %>
+                                        <form
+                                            action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                            method="POST" id="review">
+                                            <button type="submit" class="btn btn-sm btn-danger" for="review">DELETE
+                                            </button>
+                                        </form>
+                                        <% } %>
+                                </div>
                                 <% } %>
-                        </div>
-                        <% } %>
+                            </div>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
+
 
 
     <script>

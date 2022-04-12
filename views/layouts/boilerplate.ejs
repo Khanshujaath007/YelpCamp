@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="p-0 m-0">
 
 <head>
     <meta charset="UTF-8">
@@ -25,16 +25,28 @@
     <script src="/javascript/validateforms.js"></script>
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <script src="https://kit.fontawesome.com/b790902e3a.js" crossorigin="anonymous"></script>
+
+
 </head>
 
 <body class="d-flex flex-column ">
     <%- include('../partials/navbar') %>
-        <main class=" bg-dark bg-gradient">
+        <main class=" bg-dark bg-gradient ">
             <%- include('../partials/flash') %>
                 <%- body %>
         </main>
 
 </body>
 <%- include('../partials/footer') %>
+
+    <style>
+        html,
+        body {
+            margin: 0px;
+            padding: 0px;
+            width: 100%;
+            overflow-x: hidden;
+        }
+    </style>
 
 </html>
