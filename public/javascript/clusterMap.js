@@ -1,8 +1,9 @@
-const campgrounds = JSON.parse(Campground)
+const campgrounds = JSON.parse(Campgrounds);
+
 mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v11',
+    style: 'mapbox://styles/mapbox/dark-v10',
     center: [78.9629, 20.5937],
     zoom: 3
 });
