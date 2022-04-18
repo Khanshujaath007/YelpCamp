@@ -1,4 +1,3 @@
-
 const parsedcamp = JSON.parse(campground)
 mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({

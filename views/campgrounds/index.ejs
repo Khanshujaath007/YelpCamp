@@ -2,6 +2,27 @@
     <script>   const mapToken = '<%-process.env.MAPBOX_TOKEN%>'
     </script>
     <div id="map" style="width: 100%; height: 300px;" class="mt-2"></div>
+    <!-- <div id="searchWrapper" class="container d-flex justify-content-center align-items-center m-2 p-0">
+        <input class="d-flex container m-0 p-0" type="text" placeholder="Search for a Campground" />
+    </div>
+    <ul class="list-group" id="list"></ul> -->
+    <div class="container d-block justify-content-center align-items-center m-auto p-2">
+        <div class="input-group">
+            <div class="form-outline container" name="searchBar" id="searchBar">
+                <label class="form-label fs-3 text-white d-flex m-auto justify-content-center align-items-center"
+                    for="form1">Search Campground</label>
+                <input type="search" id="form1" class="form-control fs-7"
+                    placeholder="Type the campground name or location" />
+            </div>
+            <!-- <button type="button" class="btn btn-primary">
+                <i class="fas fa-search"></i>
+            </button> -->
+        </div>
+        <div class="input-group d-block justify-content-center align-items-center m-auto">
+            <ul class="list-group" id="list"></ul>
+        </div>
+    </div>
+
     <div class="d-flex justify-content-center align-items-center fs-3 text-light mt-4 fw-bold">
         <p><u>Explore Campgrounds</u> </p>
     </div>
@@ -35,6 +56,8 @@
         <% } %>
             <script>
                 const Campgrounds = '{"type": "FeatureCollection", "features": <%-JSON.stringify(campgrounds)%>}';
-                console.log(Campgrounds);
+                // console.log(Campgrounds);
+
             </script>
             <script src="/javascript/clusterMap.js"></script>
+            <script src="/javascript/searchBar.js"></script>
